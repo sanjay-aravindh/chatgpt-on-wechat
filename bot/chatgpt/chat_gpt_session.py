@@ -17,15 +17,15 @@ class ChatGPTSession(Session):
         super().__init__(session_id, system_prompt)
         self.model = model
         self.reset()
+        def discard_exceeding(self, max_tokens, cur_tokens=None):
+            precise = True
+            try:
+                cur_tokens = self.calc_tokens()
+            except Exception as e:
+                precise = False
+                if cur_tokens is None:
+                    raise e
 
-    def discard_exceeding(self, max_tokens, cur_tokens=None):
-        precise = True
-        try:
-            cur_tokens = self.calc_tokens()
-        except Exception as e:
-            precise = False
-            if cur_tokens is None:
-                raise e
             logger.debug("Exception when counting tokens precisely for query: {}".format(e))
         while cur_tokens > max_tokens:
             if len(self.messages) > 2:
