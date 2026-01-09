@@ -80,6 +80,7 @@ class ClaudeAIBot(Bot, OpenAIImage):
 
     def conversation_share_check(self,session_id):
         if conf().get("claude_uuid") is not None and conf().get("claude_uuid") != "":
+
             con_uuid = conf().get("claude_uuid")
             return con_uuid
         if session_id not in self.con_uuid_dic:
