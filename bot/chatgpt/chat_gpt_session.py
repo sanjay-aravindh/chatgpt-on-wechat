@@ -25,8 +25,7 @@ class ChatGPTSession(Session):
                 precise = False
                 if cur_tokens is None:
                     raise e
-
-            logger.debug("Exception when counting tokens precisely for query: {}".format(e))
+                    logger.debug("Exception when counting tokens precisely for query: {}".format(e))
         while cur_tokens > max_tokens:
             if len(self.messages) > 2:
                 self.messages.pop(1)
